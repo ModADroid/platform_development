@@ -33,6 +33,13 @@
     
     <string name="general_title">General</string>
     
+    <!-- extra -->
+    <string name="extra_title">Extras</string>
+    <string name="title_menu_unlock_screen">Menu button unlock</string>
+    <string name="summary_on_menu_unlock_screen">Disable Menu button unlock</string>
+    <string name="summary_off_menu_unlock_screen">Enable Menu button unlock</string>
+    <!-- end extra -->
+
     <string name="title_window_animations">Window animations</string>
     <string name="summary_window_animations">Speed of animations in individual windows</string>
     <string name="dialog_title_window_animations">Select window speed</string>

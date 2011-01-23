@@ -47,6 +47,19 @@
         
     </PreferenceCategory>
             
+
+    <!-- extra -->
+    <PreferenceCategory
+        android:title="@string/extra_title">
+
+       <CheckBoxPreference
+            android:key="menu_unlock_screen"
+            android:title="@string/title_menu_unlock_screen"
+            android:summaryOn="@string/summary_on_menu_unlock_screen"
+            android:summaryOff="@string/summary_off_menu_unlock_screen" />
+    </PreferenceCategory>
+    <!-- end -->
+
     <PreferenceCategory
         android:title="@string/general_title">
         
