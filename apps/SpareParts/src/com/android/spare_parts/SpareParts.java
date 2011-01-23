@@ -54,6 +54,7 @@ public class SpareParts extends PreferenceActivity
     //extra
     private static final String MENU_UNLOCK_SCREEN_PREF = "menu_unlock_screen";
     private static final String LAUNCHER_ORIENTATION_PREF = "launcher_orientation";
+    private static final String USE_ROTARY_LOCKSCREEN_PREF = "use_rotary_lockscreen";
     //end extra
 
     private static final String WINDOW_ANIMATIONS_PREF = "window_animations";
@@ -69,6 +70,7 @@ public class SpareParts extends PreferenceActivity
     //extra
     private CheckBoxPreference mMenuUnlockScreenPref;
     private CheckBoxPreference mLauncherOrientationPref;
+    private CheckBoxPreference mUseRotaryLockscreenPref;
     //end extra
 
     private ListPreference mWindowAnimationsPref;
@@ -126,6 +128,7 @@ public class SpareParts extends PreferenceActivity
         //extra
         mMenuUnlockScreenPref = (CheckBoxPreference) prefSet.findPreference(MENU_UNLOCK_SCREEN_PREF);
         mLauncherOrientationPref = (CheckBoxPreference) prefSet.findPreference(LAUNCHER_ORIENTATION_PREF);
+        mUseRotaryLockscreenPref = (CheckBoxPreference) prefSet.findPreference(USE_ROTARY_LOCKSCREEN_PREF);
         //end extra
 
         mWindowAnimationsPref = (ListPreference) prefSet.findPreference(WINDOW_ANIMATIONS_PREF);
@@ -164,6 +167,9 @@ public class SpareParts extends PreferenceActivity
         mLauncherOrientationPref.setChecked(Settings.System.getInt(
                 getContentResolver(), 
                 Settings.System.LAUNCHER_ORIENTATION, 0) != 0);
+        mUseRotaryLockscreenPref.setChecked(Settings.System.getInt(
+                getContentResolver(), 
+                Settings.System.USE_ROTARY_LOCKSCREEN, 0) != 0);
         //end extra
         mFancyImeAnimationsPref.setChecked(Settings.System.getInt(
                 getContentResolver(), 
@@ -273,6 +279,10 @@ public class SpareParts extends PreferenceActivity
         } else if (LAUNCHER_ORIENTATION_PREF.equals(key)) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LAUNCHER_ORIENTATION,
+                    mLauncherOrientationPref.isChecked() ? 1 : 0);
+        } else if (USE_ROTARY_LOCKSCREEN_PREF.equals(key)) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.USE_ROTARY_LOCKSCREEN,
                     mLauncherOrientationPref.isChecked() ? 1 : 0);
         //end extra
         } else if (FANCY_IME_ANIMATIONS_PREF.equals(key)) {
