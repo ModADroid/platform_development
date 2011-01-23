@@ -57,6 +57,13 @@
             android:title="@string/title_menu_unlock_screen"
             android:summaryOn="@string/summary_on_menu_unlock_screen"
             android:summaryOff="@string/summary_off_menu_unlock_screen" />
+
+       <CheckBoxPreference
+            android:key="launcher_orientation"
+            android:title="@string/title_launcher_orientation"
+            android:summaryOn="@string/summary_on_launcher_orientation"
+            android:summaryOff="@string/summary_off_launcher_orientation" />
+
     </PreferenceCategory>
     <!-- end -->
 

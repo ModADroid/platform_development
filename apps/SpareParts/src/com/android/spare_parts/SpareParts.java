@@ -53,6 +53,7 @@ public class SpareParts extends PreferenceActivity
     
     //extra
     private static final String MENU_UNLOCK_SCREEN_PREF = "menu_unlock_screen";
+    private static final String LAUNCHER_ORIENTATION_PREF = "launcher_orientation";
     //end extra
 
     private static final String WINDOW_ANIMATIONS_PREF = "window_animations";
@@ -67,6 +68,7 @@ public class SpareParts extends PreferenceActivity
     
     //extra
     private CheckBoxPreference mMenuUnlockScreenPref;
+    private CheckBoxPreference mLauncherOrientationPref;
     //end extra
 
     private ListPreference mWindowAnimationsPref;
@@ -123,6 +125,7 @@ public class SpareParts extends PreferenceActivity
         
         //extra
         mMenuUnlockScreenPref = (CheckBoxPreference) prefSet.findPreference(MENU_UNLOCK_SCREEN_PREF);
+        mLauncherOrientationPref = (CheckBoxPreference) prefSet.findPreference(LAUNCHER_ORIENTATION_PREF);
         //end extra
 
         mWindowAnimationsPref = (ListPreference) prefSet.findPreference(WINDOW_ANIMATIONS_PREF);
@@ -158,6 +161,9 @@ public class SpareParts extends PreferenceActivity
         mMenuUnlockScreenPref.setChecked(Settings.System.getInt(
                 getContentResolver(), 
                 Settings.System.MENU_UNLOCK_SCREEN, 0) != 0);
+        mLauncherOrientationPref.setChecked(Settings.System.getInt(
+                getContentResolver(), 
+                Settings.System.LAUNCHER_ORIENTATION, 0) != 0);
         //end extra
         mFancyImeAnimationsPref.setChecked(Settings.System.getInt(
                 getContentResolver(), 
@@ -264,6 +270,10 @@ public class SpareParts extends PreferenceActivity
             Settings.System.putInt(getContentResolver(),
                     Settings.System.MENU_UNLOCK_SCREEN,
                     mMenuUnlockScreenPref.isChecked() ? 1 : 0);
+        } else if (LAUNCHER_ORIENTATION_PREF.equals(key)) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.LAUNCHER_ORIENTATION,
+                    mLauncherOrientationPref.isChecked() ? 1 : 0);
         //end extra
         } else if (FANCY_IME_ANIMATIONS_PREF.equals(key)) {
             Settings.System.putInt(getContentResolver(),
