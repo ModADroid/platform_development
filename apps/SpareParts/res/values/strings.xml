@@ -42,10 +42,6 @@
     <string name="title_launcher_orientation">Launcher Orientation</string>
     <string name="summary_on_launcher_orientation">Disable Launcher rotation"</string>
     <string name="summary_off_launcher_orientation">Enable Launcher rotation"</string>
-
-    <string name="title_use_rotary_lockscreen">Rotary Lockscreen</string>
-    <string name="summary_on_use_rotary_lockscreen">Disable Rotary Lockscreen"</string>
-    <string name="summary_off_use_rotary_lockscreen">Enable Rotary Lockscreen"</string>
     <!-- end extra -->
 
     <string name="title_window_animations">Window animations</string>
