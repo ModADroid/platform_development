@@ -54,6 +54,8 @@ public class SpareParts extends PreferenceActivity
     //extra
     private static final String MENU_UNLOCK_SCREEN_PREF = "menu_unlock_screen";
     private static final String LAUNCHER_ORIENTATION_PREF = "launcher_orientation";
+    private static final String CLOCK_COLOR_PREF = "clock_color";
+    private static final String BATTERY_COLOR_PREF = "battery_color";
     //end extra
 
     private static final String WINDOW_ANIMATIONS_PREF = "window_animations";
@@ -69,6 +71,8 @@ public class SpareParts extends PreferenceActivity
     //extra
     private CheckBoxPreference mMenuUnlockScreenPref;
     private CheckBoxPreference mLauncherOrientationPref;
+    private Preference mClockColorPref;
+    private Preference mBatteryColorPref;
     //end extra
 
     private ListPreference mWindowAnimationsPref;
@@ -126,6 +130,8 @@ public class SpareParts extends PreferenceActivity
         //extra
         mMenuUnlockScreenPref = (CheckBoxPreference) prefSet.findPreference(MENU_UNLOCK_SCREEN_PREF);
         mLauncherOrientationPref = (CheckBoxPreference) prefSet.findPreference(LAUNCHER_ORIENTATION_PREF);
+        mClockColorPref = prefSet.findPreference(CLOCK_COLOR_PREF);
+        mBatteryColorPref = prefSet.findPreference(BATTERY_COLOR_PREF);
         //end extra
 
         mWindowAnimationsPref = (ListPreference) prefSet.findPreference(WINDOW_ANIMATIONS_PREF);
@@ -195,6 +201,20 @@ public class SpareParts extends PreferenceActivity
                     mCompatibilityMode.isChecked() ? 1 : 0);
             return true;
         }
+        //extra
+        else if (preference == mClockColorPref) {
+            ColorPickerDialog cp = new ColorPickerDialog(this,
+            mClockFontColorListener,
+            readClockFontColor());
+            cp.show();            
+        }
+        else if (preference == mBatteryColorPref) {
+            ColorPickerDialog cp = new ColorPickerDialog(this,
+            mBatteryFontColorListener,
+            readBatteryFontColor());
+            cp.show();            
+        }
+        //end extra
         return false;
     }
 
@@ -264,6 +284,37 @@ public class SpareParts extends PreferenceActivity
         }
     }
     
+    //extra
+    private int readClockFontColor() {
+        try {
+            return Settings.System.getInt(getContentResolver(), Settings.System.CLOCK_COLOR);
+        }
+        catch (SettingNotFoundException e) {
+            return -16777216;
+        }
+    }
+    ColorPickerDialog.OnColorChangedListener mClockFontColorListener = 
+        new ColorPickerDialog.OnColorChangedListener() {
+            public void colorChanged(int color) {
+                Settings.System.putInt(getContentResolver(), Settings.System.CLOCK_COLOR, color);
+            }
+        };
+    private int readBatteryFontColor() {
+        try {
+            return Settings.System.getInt(getContentResolver(), Settings.System.BATTERY_COLOR);
+        }
+        catch (SettingNotFoundException e) {
+            return -1;
+        }
+    }
+    ColorPickerDialog.OnColorChangedListener mBatteryFontColorListener = 
+        new ColorPickerDialog.OnColorChangedListener() {
+            public void colorChanged(int color) {
+                Settings.System.putInt(getContentResolver(), Settings.System.BATTERY_COLOR, color);
+            }
+        };
+    //end extra
+
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
         //extra
         if (MENU_UNLOCK_SCREEN_PREF.equals(key)) {
