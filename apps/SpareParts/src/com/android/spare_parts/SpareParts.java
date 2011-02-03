@@ -55,7 +55,9 @@ public class SpareParts extends PreferenceActivity
     private static final String MENU_UNLOCK_SCREEN_PREF = "menu_unlock_screen";
     private static final String LAUNCHER_ORIENTATION_PREF = "launcher_orientation";
     private static final String CLOCK_COLOR_PREF = "clock_color";
+    private static final String BATTERY_PERCENTAGE_PREF = "battery_percentage";
     private static final String BATTERY_COLOR_PREF = "battery_color";
+    private static final String BATTERY_FONT_SIZE_PREF = "battery_fontsize";
     //end extra
 
     private static final String WINDOW_ANIMATIONS_PREF = "window_animations";
@@ -72,7 +74,9 @@ public class SpareParts extends PreferenceActivity
     private CheckBoxPreference mMenuUnlockScreenPref;
     private CheckBoxPreference mLauncherOrientationPref;
     private Preference mClockColorPref;
+    private CheckBoxPreference mBatteryPercentagePref;
     private Preference mBatteryColorPref;
+    private ListPreference mBatteryFontSizePref;
     //end extra
 
     private ListPreference mWindowAnimationsPref;
@@ -131,7 +135,10 @@ public class SpareParts extends PreferenceActivity
         mMenuUnlockScreenPref = (CheckBoxPreference) prefSet.findPreference(MENU_UNLOCK_SCREEN_PREF);
         mLauncherOrientationPref = (CheckBoxPreference) prefSet.findPreference(LAUNCHER_ORIENTATION_PREF);
         mClockColorPref = prefSet.findPreference(CLOCK_COLOR_PREF);
+        mBatteryPercentagePref = (CheckBoxPreference) prefSet.findPreference(BATTERY_PERCENTAGE_PREF);
         mBatteryColorPref = prefSet.findPreference(BATTERY_COLOR_PREF);
+        mBatteryFontSizePref = (ListPreference) prefSet.findPreference(BATTERY_FONT_SIZE_PREF);
+        mBatteryFontSizePref.setOnPreferenceChangeListener(this);
         //end extra
 
         mWindowAnimationsPref = (ListPreference) prefSet.findPreference(WINDOW_ANIMATIONS_PREF);
@@ -170,6 +177,9 @@ public class SpareParts extends PreferenceActivity
         mLauncherOrientationPref.setChecked(Settings.System.getInt(
                 getContentResolver(), 
                 Settings.System.LAUNCHER_ORIENTATION, 0) != 0);
+        mBatteryPercentagePref.setChecked(Settings.System.getInt(
+                getContentResolver(), 
+                Settings.System.BATTERY_PERCENTAGE, 0) != 0);
         //end extra
         mFancyImeAnimationsPref.setChecked(Settings.System.getInt(
                 getContentResolver(), 
@@ -188,7 +198,11 @@ public class SpareParts extends PreferenceActivity
             writeFontSizePreference(objValue);
         } else if (preference == mEndButtonPref) {
             writeEndButtonPreference(objValue);
+        //extra
+        } else if (preference == mBatteryFontSizePref) {
+            writeBatteryFontSizePreference(objValue);
         }
+        //end extra
         // always let the preference setting proceed.
         return true;
     }
@@ -235,6 +249,17 @@ public class SpareParts extends PreferenceActivity
         }
     }
     
+    //extra
+    public void writeBatteryFontSizePreference(Object objValue) {
+        try {
+            int val = Integer.parseInt(objValue.toString());
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.BATTERY_FONT_SIZE, val);
+        } catch (NumberFormatException e) {
+        }
+    }
+    //end extra
+
     public void writeEndButtonPreference(Object objValue) {
         try {
             int val = Integer.parseInt(objValue.toString());
@@ -276,6 +301,17 @@ public class SpareParts extends PreferenceActivity
                 R.array.entryvalues_font_size));
     }
     
+    //extra
+    private int readBatteryFontSizePreference(ListPreference pref) {
+        try {
+            return Settings.System.getInt(getContentResolver(), Settings.System.BATTERY_FONT_SIZE);
+        }
+            catch (SettingNotFoundException e) {
+            return 12;
+        }
+    }
+    //end extra
+
     public void readEndButtonPreference(ListPreference pref) {
         try {
             pref.setValueIndex(Settings.System.getInt(getContentResolver(),
@@ -325,6 +361,10 @@ public class SpareParts extends PreferenceActivity
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LAUNCHER_ORIENTATION,
                     mLauncherOrientationPref.isChecked() ? 1 : 0);
+        } else if (BATTERY_PERCENTAGE_PREF.equals(key)) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.BATTERY_PERCENTAGE,
+                    mBatteryPercentagePref.isChecked() ? 1 : 0);
         //end extra
         } else if (FANCY_IME_ANIMATIONS_PREF.equals(key)) {
             Settings.System.putInt(getContentResolver(),
@@ -344,6 +384,9 @@ public class SpareParts extends PreferenceActivity
         readAnimationPreference(1, mTransitionAnimationsPref);
         readFontSizePreference(mFontSizePref);
         readEndButtonPreference(mEndButtonPref);
+        //extra
+        readBatteryFontSizePreference(mBatteryFontSizePref);
+        //end extra
         updateToggles();
     }
 }

@@ -45,11 +45,16 @@
 
     <string name="title_clock_color">Clock color</string>
     <string name="summary_clock_color">Change clock color</string>
-    <string name="dialog_title_clock_color">Select clock color</string>
+
+    <string name="title_battery_percentage">Show battery percentage</string>
+    <string name="summary_on_battery_percentage">Disable battery percentage</string>
+    <string name="summary_off_battery_percentage">Enable battery percentage</string>
 
     <string name="title_battery_color">Battery percentage color</string>
     <string name="summary_battery_color">Change battery percentage color</string>
-    <string name="dialog_title_battery_color">Select battery color</string>
+
+    <string name="title_battery_font_size">Battery percentage font size</string>
+    <string name="summary_battery_font_size">Change battery percentage font size</string>
     <!-- end extra -->
 
     <string name="title_window_animations">Window animations</string>

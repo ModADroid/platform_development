@@ -65,4 +65,18 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+
+    <!-- Extra -->
+    <string-array name="entries_battery_font_size">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+
+    <string-array name="entryvalues_battery_font_size">
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    <!-- end extra -->
 </resources>
