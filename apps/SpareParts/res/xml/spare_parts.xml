@@ -64,7 +64,14 @@
             android:summaryOn="@string/summary_on_launcher_orientation"
             android:summaryOff="@string/summary_off_launcher_orientation" />
 
+       <CheckBoxPreference
+            android:key="display_clock"
+            android:title="@string/title_display_clock"
+            android:summaryOn="@string/summary_on_display_clock"
+            android:summaryOff="@string/summary_off_display_clock" />
+
         <Preference
+                android:dependency="display_clock"
                 android:key="clock_color"
                 android:title="@string/title_clock_color"
                 android:summary="@string/summary_clock_color"

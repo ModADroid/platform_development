@@ -43,6 +43,10 @@
     <string name="summary_on_launcher_orientation">Disable Launcher rotation"</string>
     <string name="summary_off_launcher_orientation">Enable Launcher rotation"</string>
 
+    <string name="title_display_clock">Status Bar Clock</string>
+    <string name="summary_on_display_clock">Disable clock in status bar"</string>
+    <string name="summary_off_display_clock">Enable clock in status bar"</string>
+
     <string name="title_clock_color">Clock color</string>
     <string name="summary_clock_color">Change clock color</string>
 
