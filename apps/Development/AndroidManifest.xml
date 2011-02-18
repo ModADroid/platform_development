@@ -47,6 +47,7 @@
 
         <uses-library android:name="android.test.runner" />
 
+        <!--
         <activity android:name="Development" android:label="Dev Tools"
             android:icon="@drawable/ic_launcher_devtools">
             <intent-filter>
@@ -54,6 +55,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        -->
         <activity android:name="PackageBrowser" android:label="Package Browser">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
