@@ -58,7 +58,6 @@ public class SpareParts extends PreferenceActivity
     private static final String CLOCK_COLOR_PREF = "clock_color";
     private static final String BATTERY_PERCENTAGE_PREF = "battery_percentage";
     private static final String BATTERY_COLOR_PREF = "battery_color";
-    private static final String BATTERY_FONT_SIZE_PREF = "battery_fontsize";
     //end extra
 
     private static final String WINDOW_ANIMATIONS_PREF = "window_animations";
@@ -73,7 +72,6 @@ public class SpareParts extends PreferenceActivity
     private Preference mClockColorPref;
     private CheckBoxPreference mBatteryPercentagePref;
     private Preference mBatteryColorPref;
-    private ListPreference mBatteryFontSizePref;
     //end extra
 
     private ListPreference mWindowAnimationsPref;
@@ -132,8 +130,6 @@ public class SpareParts extends PreferenceActivity
         mClockColorPref = prefSet.findPreference(CLOCK_COLOR_PREF);
         mBatteryPercentagePref = (CheckBoxPreference) prefSet.findPreference(BATTERY_PERCENTAGE_PREF);
         mBatteryColorPref = prefSet.findPreference(BATTERY_COLOR_PREF);
-        mBatteryFontSizePref = (ListPreference) prefSet.findPreference(BATTERY_FONT_SIZE_PREF);
-        mBatteryFontSizePref.setOnPreferenceChangeListener(this);
         //end extra
 
         mWindowAnimationsPref = (ListPreference) prefSet.findPreference(WINDOW_ANIMATIONS_PREF);
@@ -184,11 +180,7 @@ public class SpareParts extends PreferenceActivity
             writeAnimationPreference(0, objValue);
         } else if (preference == mTransitionAnimationsPref) {
             writeAnimationPreference(1, objValue);
-        //extra
-        } else if (preference == mBatteryFontSizePref) {
-            writeBatteryFontSizePreference(objValue);
         }
-        //end extra
         // always let the preference setting proceed.
         return true;
     }
@@ -227,17 +219,6 @@ public class SpareParts extends PreferenceActivity
         }
     }
 
-    //extra
-    public void writeBatteryFontSizePreference(Object objValue) {
-        try {
-            int val = Integer.parseInt(objValue.toString());
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.BATTERY_FONT_SIZE, val);
-        } catch (NumberFormatException e) {
-        }
-    }
-    //end extra
-
     int floatToIndex(float val, int resid) {
         String[] indices = getResources().getStringArray(resid);
         float lastVal = Float.parseFloat(indices[0]);
@@ -259,17 +240,6 @@ public class SpareParts extends PreferenceActivity
         } catch (RemoteException e) {
         }
     }
-
-    //extra
-    private int readBatteryFontSizePreference(ListPreference pref) {
-        try {
-            return Settings.System.getInt(getContentResolver(), Settings.System.BATTERY_FONT_SIZE);
-        }
-            catch (SettingNotFoundException e) {
-            return 12;
-        }
-    }
-    //end extra
 
     //extra
     private int readClockFontColor() {
@@ -333,9 +303,6 @@ public class SpareParts extends PreferenceActivity
         super.onResume();
         readAnimationPreference(0, mWindowAnimationsPref);
         readAnimationPreference(1, mTransitionAnimationsPref);
-        //extra
-        readBatteryFontSizePreference(mBatteryFontSizePref);
-        //end extra
         updateToggles();
     }
 }

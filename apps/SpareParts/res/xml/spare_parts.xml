@@ -90,14 +90,6 @@
                 android:summary="@string/summary_battery_color"
                 android:defaultValue="-1" />
 
-        <ListPreference
-                android:dependency="battery_percentage"
-                android:key="battery_fontsize"
-                android:title="@string/title_battery_font_size"
-                android:summary="@string/summary_battery_font_size"
-                android:entries="@array/entries_battery_font_size"
-                android:entryValues="@array/entryvalues_battery_font_size" />
-
     </PreferenceCategory>
     <!-- end -->
 

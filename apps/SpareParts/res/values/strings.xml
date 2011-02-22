@@ -56,9 +56,6 @@
 
     <string name="title_battery_color">Battery percentage color</string>
     <string name="summary_battery_color">Change battery percentage color</string>
-
-    <string name="title_battery_font_size">Battery percentage font size</string>
-    <string name="summary_battery_font_size">Change battery percentage font size</string>
     <!-- end extra -->
 
     <string name="title_window_animations">Window animations</string>
